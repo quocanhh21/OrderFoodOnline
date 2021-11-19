@@ -1,0 +1,180 @@
+﻿@model List<Model.EF.Product>
+@{
+    var category = (Model.EF.ProductCategory)ViewBag.Category;
+    ViewBag.Title = category.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="page-info new-block">
+    <div class="fixed-bg" style="background: url('images/info-bg.jpg');"></div>
+    <div class="overlay"></div>
+    <div class="container">
+        <h2>Domnoo menu</h2>
+        <div class="clear-fix"></div>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active"><a href="">@category.Name</a></li>
+        </ol>
+    </div>
+</section>
+
+
+
+
+<section class="domnoo-menu-filter list-grid-sec new-block">
+    <div class="fixed-bg parallax" style="background-image: url(images/ptrn1.jpg);"></div>
+    <div class="overlay"></div>
+    <div class="filters">
+        @{Html.RenderAction("ProductCategory", "Product");}
+        <div class="filter-tabnav">
+            <div class="container">
+                <p class="showing-result">Showing 1 - 20 of 245 Products</p>
+                <span class="sort-by"> Short by :</span>
+                <ul class="button-group js-radio-button-group" data-filter-group="item_cat_inner">
+                    <li class="sort-btn" data-sort="default:asc"><span>Newest First</span></li>
+                    <li class="sort-btn" data-sort="popularity:asc"><span>Popularity</span></li>
+                    <li class="sort-btn" data-sort="price:asc"><span>Low to Heigh</span></li>
+                    <li class="sort-btn" data-sort="price:desc"><span>How to Low</span></li>
+                </ul>
+                <ul class="filter-check">
+                    <li>
+                        <div class="form-check">
+                            <label>
+                                <input type="radio" name="level"> <span class="label-text">Veg</span>
+                            </label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="form-check">
+                            <label>
+                                <input type="radio" name="level"> <span class="label-text">Non Veg</span>
+                            </label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="form-check">
+                            <label>
+                                <input type="radio" name="level"> <span class="label-text">Pan</span>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+                <div class="list-grid-btns">
+                    <button class="btn grid-btn"><i class="flaticon-menu"></i></button>
+                    <button class="btn active list-btn"><i class="flaticon-grid"></i></button>
+                </div>
+            </div>
+        </div>
+        <!--// .filter-tabnav -->
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="grid" id="grid">
+        @foreach (var item in Model)
+        {
+            var link = "/product-single/" + item.MetaTitle + "-" + item.ID;
+            <div class="items-for-flr pizza" data-newest="1" data-popularity="5" data-price="6.00">
+                <div class="block-stl2">
+                    <div class="img-holder">
+                        <img src="@item.Image" alt="" class="img-responsive">
+                    </div>
+                    <div class="text-block">
+                        <h3>@item.Name</h3>
+                        <p class="sz"> </p>
+                        <p class="ab-it">Lorem ipsum dolor sit amet..</p>
+                        <p class="price"><span>$ @(item.Price.HasValue ? item.Price.Value.ToString("N0"):"Liên hệ")</span> <del>$8.00 40% off</del></p>
+                    </div>
+                    <div class="btn-sec">
+                        <a href="@link" class="btn4">About More</a>
+                        <a href="/add-cart?productId=@item.ID&quantity=1" class="btn4">Add to Cart</a>
+                    </div>
+                    <span class="nonveg veg-nonveg"></span>
+                </div>
+                <div class="block-stl2_dsn2 md2">
+                    <div class="img-holder">
+                        <img src="@item.Image" alt="" class="img-responsive">
+                    </div>
+                    <div class="text-block">
+                        <h3>@item.Name</h3>
+                        <p class="sz">Size : Regular</p>
+                        <p class="ab-it">Lorem ipsum dolor sit amet..</p>
+                        <p class="price"><span>$6.00</span> <del>$8.00 40% off</del></p>
+                        <div class="btn-sec">
+                            <a href="#" class="btn4">About More</a>
+                            <a href="#" class="btn4">Add to Cart</a>
+                        </div>
+                    </div>
+                    <span class="nonveg veg-nonveg"></span>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="clearfix"></div>
+    @*<div class="container text-center">
+            <div class="pegination-block">
+                <ul class="pagination">
+                    <li><a href="#"><i class="flaticon-left-arrow"></i></a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#"><i class="flaticon-right-arrow"></i></a></li>
+                </ul>
+            </div>
+        </div>*@
+
+    <!--Phân trang-->
+    <div class="container text-center">
+        @if (ViewBag.TotalPage > 1)
+        {
+            var pageDisplay = (int)ViewBag.MaxPage;
+            int totalPage = (int)ViewBag.TotalPage;
+            int currentPage = ((int)ViewBag.Page);
+
+            // Create numeric links
+            var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+            var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
+
+            var link = "/products/" + category.MetaTitle + "-" + category.ID;
+            <div class="pegination-block">
+                <ul class="pagination">
+                    @if (currentPage > ViewBag.First)
+                    {
+                        <li><a href="@link?page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i></a></li>
+                        <li>
+                            <a href="@link?page=@ViewBag.Prev" title="Trang trước" class="prev"><i class="flaticon-left-arrow"></i></a>
+                        </li>
+
+                    }
+                    @for (int i = startPageIndex; i <= endPageIndex; i++)
+                    {
+                        if (currentPage == i)
+                        {
+
+                            <li> <a href="@link?page=@i" class="active" title="Trang @i">@i</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@link?page=@i" title="Trang @i" class="pos">@i</a></li>
+                        }
+                    }
+                    @if (currentPage < totalPage)
+                    {
+                        <li><a href="@link?page=@ViewBag.Next" class="next" title="Trang sau"><i class="flaticon-right-arrow"></i></a></li>
+                        <li> <a href="@link?page=@ViewBag.Last" class="last" title="Trang cuối"><i class="fa fa-angle-double-right"></i></a></li>
+                    }
+
+                </ul>
+            </div>
+
+        }
+        else
+        {
+            <span class="alert alert-danger">There are no products</span>
+        }
+    </div>
+    
+</section>

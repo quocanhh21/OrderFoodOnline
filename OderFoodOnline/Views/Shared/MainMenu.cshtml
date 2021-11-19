@@ -1,0 +1,15 @@
+﻿@model List<Model.EF.Menu>
+
+<nav class="nav">
+    <ul class="list-unstyled">
+        @foreach (var item in Model)
+        {
+
+            <li class="drop">
+                <a href="@item.Link" target="@item.Target">@item.Text</a>
+            </li>
+
+        }
+
+    </ul>
+    </nav>

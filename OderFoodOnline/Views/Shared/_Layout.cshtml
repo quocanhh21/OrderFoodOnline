@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Domnoo Restaurant & Pizza HTML Template</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/Assets/Client/images/fav2.ico" type="image/x-icon">
+    <link rel="icon" href="~/Assets/Client/images/fav2.ico" type="image/x-icon">
+    <!-- include the site stylesheet -->
+    <link rel="stylesheet" href="~/Assets/Client/css/bootstrap.min.css">
+    <!-- main stylesheet -->
+    <link rel="stylesheet" href="~/Assets/Client/css/style.css">
+    <!-- color stylesheet -->
+    <link rel="stylesheet" href="~/Assets/Client/css/colors.css" id="ui-theme-color">
+    <!-- responsive css -->
+    <link rel="stylesheet" href="~/Assets/Client/css/responsive.css">
+</head>
+<body>
+   
+    <div class="loader_wrapper">
+        <div class="loader">
+            <img src="~/Assets/Client/images/loader.gif" alt="" class="img-fluid">
+        </div>
+    </div>
+    <!--// loader_wrapper -->
+
+    <div id="wrapper">
+        <header class="new-block main-header">
+
+            <div class="main-nav new-block">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="logo">
+                                <a href="/" rel="nofollow"><img src="~/Assets/Client/images/logo.png" alt="logo" class="img-responsive"></a>
+                            </div>
+                            <div class="location-block">
+                                <p>Viet Nam</p>
+                                <span>+89 123 456 789</span>
+                            </div>
+                            <a href="#" class="nav-opener"><i class="fa fa-bars"></i></a>
+                            @*<nav class="nav">*@
+                            @{Html.RenderAction("MainMenu", "HomeUser");}
+
+                            @*</nav>*@
+                            <div class="nav-right-block">
+                                @{Html.RenderAction("HeaderCart", "HomeUser");}
+                            </div><!-- nav-login -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- header -->
+        @RenderSection("slide", required: false)
+
+
+        <div class="main">
+            @RenderBody()
+        </div>
+
+
+        <footer class="main-footer new-block">
+            @{Html.RenderAction("Footer", "HomeUser"); }
+        </footer>
+        <div class="copy-right">
+            <div class="container">
+
+                <ul class="social-nav">
+                    <li><a href="#"><i class="flaticon-facebook-logo"></i></a></li>
+                    <li><a href="#"><i class="flaticon-twitter"></i></a></li>
+                    <li><a href="#"><i class="flaticon-google-plus-logo"></i></a></li>
+                    <li><a href="#"><i class="flaticon-dribbble-logo"></i></a></li>
+                    <li><a href="#"><i class="flaticon-behance"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <span id="go_to_top" class="go-to-top"><i class="flaticon-up-arrow"></i></span>
+        <div class="theme-menu hide-sidebar">
+            @{Html.RenderAction("MenuChild", "HomeUser");}
+        </div>
+
+        </div><!-- #wrapper -->
+    <!-- include jQuery -->
+    <script src="~/Assets/Client/js/jquery.min.js"></script>
+    <!-- bootstrap -->
+    <script src="~/Assets/Client/js/bootstrap.min.html"></script>
+    <!-- bootstrap -->
+    <script src="~/Assets/Client/js/owl.carousel.min.js"></script>
+    <!-- slick slider  -->
+    <script src="~/Assets/Client/js/slick.js"></script>
+    <!-- dscountdown  -->
+    <script src="~/Assets/Client/js/dscountdown.min.js"></script>
+    <!-- jquery.nice-select -->
+    <script src="~/Assets/Client/js/jquery.nice-select.js"></script>
+    <!-- magnific-popup -->
+    <script src="~/Assets/Client/js/jquery.magnific-popup.min.js"></script>
+    <!-- Mixitup -->
+    <script src="~/Assets/Client/js/mixitup.min.js"></script>
+    <!-- Google Map -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBP1lPhUhDU6MINpruPDinAzXffRlpzzFo"></script>
+    <script src="~/Assets/Client/js/map.js"></script>
+    <!-- custom js -->
+    <script src="~/Assets/Client/js/custom.js"></script>
+    @RenderSection("jsFooter",required:false)
+</body>
+
+
+</html>

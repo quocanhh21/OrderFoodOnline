@@ -1,0 +1,32 @@
+﻿@model List<Model.EF.Menu>
+
+<h2></h2>
+<div id="style-switcher">
+    @{
+        var session = (OderFoodOnline.Common.UserLogin)Session[OderFoodOnline.Common.CommonConstants.USER_SESSION];
+    }
+    @if (session == null)
+    {
+        <ul class="colors theme-btn">
+            @foreach (var item in Model)
+            {
+                <li>
+                    <a href="@item.Link" target="@item.Target"><p class="btn clr-style" style="background:#f1b601;">@item.Text</p></a>
+                </li>
+
+            }
+        </ul>
+    }
+    else
+    {
+        <ul>
+            <li><h2>Hello: @session.UserName</h2></li>
+            <li  style="background:#f1b601;"><h3>@Html.ActionLink("Log out","Logout","UserClient")</h3></li>
+        </ul>
+    }
+
+
+
+
+</div>
+<button class="btn btn-clr"><i class="fas fa-user-circle"></i></button>

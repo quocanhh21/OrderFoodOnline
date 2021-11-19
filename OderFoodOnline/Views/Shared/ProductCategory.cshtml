@@ -1,0 +1,20 @@
+﻿@model List<Model.EF.ProductCategory>
+
+
+
+
+<ul class="button-group tab-flr-btn">
+    @foreach (var item in Model)
+    {
+        <li data-filter=".pizza" class="btn-flr ">
+            <a href="/products/@item.MetaTitle-@item.ID">
+                <div class="cat-block">
+                    <div class="block-stl1 bg1">
+                        <i class="fab fa-delicious"></i>
+                        <h4>@item.Name</h4>
+                    </div>
+                </div>
+            </a>
+        </li>
+    }
+</ul>
